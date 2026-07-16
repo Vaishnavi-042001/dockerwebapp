@@ -2,13 +2,28 @@ version: "3.9"
 
 services:
   devopsdb:
-    image: vaishnavidhulipala04/myrepository:db
+    image: vaishnavidhulipala04/automation:db
     ports:
       - "3306:3306"
+    networks:
+      - devops-network
+    deploy:
+      replicas: 2
 
   application:
-    image: vaishnavidhulipala04/myrepository:app
+    image: vaishnavidhulipala04/automation:app
     ports:
       - "1111:8080"
     depends_on:
       - devopsdb
+    networks:
+      - app-network
+    deploy:
+      replicas: 2
+
+
+  networks:
+   devops-network:
+    driver: overlay
+   app-network:
+    driver: overlay
