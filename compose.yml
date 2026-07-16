@@ -17,13 +17,11 @@ services:
     depends_on:
       - devopsdb
     networks:
-      - app-network
+      - devops-network
     deploy:
       replicas: 2
 
 
   networks:
    devops-network:
-    driver: overlay
-   app-network:
     driver: overlay
